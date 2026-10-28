@@ -1,6 +1,6 @@
 {
   "name": "@redturtle/volto-agid-video",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "volto-agid-video: video player AGID (video.js + bootstrap-italia, come it-video di dev-kit-italia) per Volto",
   "main": "src/index.js",
   "license": "MIT",
