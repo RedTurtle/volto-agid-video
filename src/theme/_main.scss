@@ -1,0 +1,145 @@
+// Stili del video player AGID, come <it-video> di dev-kit-italia:
+// css di video.js + tema 'vjs-theme-bootstrap-italia' di bootstrap-italia.
+// Questo file è incluso da design-comuni-plone-theme (addonsThemeCustomizationsMain),
+// quindi variabili e mixin di bootstrap-italia sono già disponibili.
+
+// css base di video.js (include il font VideoJS in base64)
+/* stylelint-disable */
+@import 'video.js/src/css/video-js';
+/* stylelint-enable */
+
+// tema bootstrap-italia (bootstrap-italia/src/scss/custom/videoplayer)
+.vjs-theme-bootstrap-italia {
+  .vjs-big-play-button {
+    background-color: $primary;
+  }
+
+  &:hover .vjs-big-play-button,
+  &.vjs-big-play-button:focus {
+    background-color: $primary;
+  }
+
+  .vjs-control-bar {
+    background-color: $primary;
+    font-size: 1.1em;
+
+    @include media-breakpoint-up(lg) {
+      min-height: 48px;
+      font-size: 1rem;
+    }
+  }
+}
+
+.vjs-transcription {
+  display: flex;
+  justify-content: center;
+  border: none;
+
+  .accordion-button {
+    border: none;
+  }
+
+  .accordion-item {
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
+      width: 75ch;
+    }
+  }
+}
+
+// regole di dev-kit-italia/packages/video (it-video.scss)
+.agid-video-player {
+  display: block;
+  width: 100%;
+
+  video:not([width]) {
+    width: 100%;
+    height: auto;
+  }
+
+  .video-js.vjs-youtube .vjs-tech {
+    aspect-ratio: 16 / 9;
+  }
+
+  .ratio > iframe {
+    border: 0;
+  }
+
+  // anteprima dei video di terze parti, prima del click su play
+  .agid-video-preview {
+    .vjs-poster img {
+      object-fit: cover;
+    }
+
+    .vjs-big-play-button {
+      z-index: 1;
+    }
+  }
+}
+
+// design-comuni-plone-theme applica a '.video-inner > div' un box 16:9
+// pensato per l'Embed di semantic-ui: lo annulliamo, le dimensioni del player
+// sono gestite da video.js (fluid)
+.block.video .video-inner > div.agid-video-player,
+.public-ui .block.video .video-inner > div.agid-video-player {
+  overflow: visible;
+  height: auto;
+  padding-bottom: 0;
+}
+
+// blocco Video gallery: riportiamo sul player gli stili che
+// design-comuni-plone-theme applicava all'Embed di semantic-ui
+// (ItaliaTheme/Blocks/_videoGallery.scss)
+$agid-video-gallery-height: 190px;
+
+.block.video_gallery .video-wrapper {
+  .agid-video-player {
+    // spaziatura tra le slide, compensata da '.slick-list { margin: 0 -1rem }'
+    padding: 0 1em;
+
+    // altezza fissa al posto del box 16:9 di video.js (fluid)
+    .video-js.video-js,
+    .ratio {
+      height: $agid-video-gallery-height;
+      padding-top: 0;
+    }
+
+    .ratio::before {
+      display: none;
+    }
+
+    // annulla '.video-wrapper video { max-width: 300px; max-height: 150px }'
+    // pensato per il vecchio <video>, che ora è il tech interno di video.js
+    .video-js video.vjs-tech {
+      max-width: none;
+      max-height: none;
+      margin: 0;
+    }
+
+    .video-js .vjs-tech {
+      aspect-ratio: auto;
+    }
+  }
+
+  // anteprima: immagine a tutta altezza in cover, come il vecchio placeholder
+  .agid-video-preview .vjs-poster img {
+    width: 100%;
+    height: $agid-video-gallery-height;
+    object-fit: cover;
+  }
+}
+
+// focus sulla slide: contorno attorno al video visibile
+.block.video_gallery .it-single-slide-wrapper:focus .video-wrapper {
+  .agid-video-player .video-js,
+  .agid-video-player .ratio {
+    outline: 2px solid $outer-focus-outline;
+    outline-offset: 2px;
+  }
+}
+
+// in edit il video non deve essere interattivo, per poter selezionare il subblock
+.block.video_gallery .subblock-edit .video-wrapper .agid-video-player {
+  pointer-events: none;
+}
