@@ -10,6 +10,10 @@
     "plone",
     "react"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RedTurtle/volto-agid-video"
+  },
   "publishConfig": {
     "access": "public"
   },
