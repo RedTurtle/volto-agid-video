@@ -39,6 +39,16 @@ export const isVimeoUrl = (url) =>
 export const getVimeoId = (url) => url?.match(vimeoRegex)?.[1] ?? null;
 
 /*
+ Picture-in-Picture needs a <video> element of the page: it can't work with
+ the YouTube tech (the video lives in a cross-origin iframe) nor in browsers
+ without the PiP API (e.g. Firefox, which has its own native toggle).
+*/
+export const canUsePictureInPicture = (isYoutube) =>
+  !isYoutube &&
+  typeof document !== 'undefined' &&
+  !!document.pictureInPictureEnabled;
+
+/*
  Ricava il mime-type dall'estensione del file, se riconosciuta
 */
 export const getVideoMimeType = (url) => {

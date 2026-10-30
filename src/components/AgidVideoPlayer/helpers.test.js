@@ -1,11 +1,19 @@
 import config from '@plone/volto/registry';
 import {
+  canUsePictureInPicture,
   getVideoSource,
   getVideoMimeType,
   getYouTubeSrc,
   isYouTubeUrl,
   isVimeoUrl,
 } from './helpers';
+
+// jsdom has no PiP API: simulate a browser that supports it
+const setPictureInPictureEnabled = (value) =>
+  Object.defineProperty(document, 'pictureInPictureEnabled', {
+    value,
+    configurable: true,
+  });
 
 beforeAll(() => {
   config.settings.apiPath = 'http://localhost:8080/Plone';
@@ -94,5 +102,15 @@ describe('volto-agid-video helpers', () => {
       type: 'video/mp4',
     });
     expect(getVideoSource(null)).toBe(null);
+  });
+
+  it('allows picture-in-picture only for files in browsers with the PiP API', () => {
+    setPictureInPictureEnabled(true);
+    expect(canUsePictureInPicture(false)).toBe(true);
+    expect(canUsePictureInPicture(true)).toBe(false);
+
+    delete document.pictureInPictureEnabled;
+    expect(canUsePictureInPicture(false)).toBe(false);
+    expect(canUsePictureInPicture(true)).toBe(false);
   });
 });
