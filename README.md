@@ -8,7 +8,7 @@ le stesse opzioni di default e lo stesso layout
 
 La gestione del consenso ai cookie **non** è quella di dev-kit-italia: resta
 in carico a `ConditionalEmbed` di
-[volto-gdpr-privacy](https://github.com/RedTurtle/volto-gdpr-privacy), come
+[volto-gdpr-privacy](https://github.com/collective/volto-gdpr-privacy), come
 già avveniva.
 
 ## Installazione
