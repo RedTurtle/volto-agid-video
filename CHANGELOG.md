@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.1](https://github.com/RedTurtle/volto-agid-video/compare/v0.3.0...v0.3.1) (2026-11-03)
+
+### Bug Fixes
+
+* npm.yml ([3586090](https://github.com/RedTurtle/volto-agid-video/commit/358609042b30b67ce26f7ceac30613ea0c65c3cf))
+
 ## [0.3.0](https://github.com/RedTurtle/volto-agid-video/compare/v0.2.0...v0.3.0) (2026-11-03)
 
 ### Features
