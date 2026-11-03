@@ -17,7 +17,11 @@ import config from '@plone/volto/registry';
 
 import itLang from './locales/it';
 import { initYoutubePlugin } from './youtube-video';
-import { isYouTubeUrl, DEFAULT_VIDEO_TYPE } from './helpers';
+import {
+  isYouTubeUrl,
+  canUsePictureInPicture,
+  DEFAULT_VIDEO_TYPE,
+} from './helpers';
 import VideoPreview from './VideoPreview';
 
 const AgidVideoPlayer = ({
@@ -119,6 +123,15 @@ const AgidVideoPlayer = ({
         ...(activatedByUser ? { autoplay: true } : {}),
         ..._options,
       };
+
+      // where PiP can't work video.js would show an always disabled button:
+      // don't create it, keeping any controlBar option set above
+      if (!canUsePictureInPicture(isYoutube)) {
+        mergedOptions.controlBar = {
+          ...mergedOptions.controlBar,
+          pictureInPictureToggle: false,
+        };
+      }
 
       // video.js modifica il DOM dell'elemento: lo creiamo fuori da React
       const videoElement = document.createElement('video-js');

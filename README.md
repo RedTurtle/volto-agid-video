@@ -124,4 +124,8 @@ iframe.
 - nessun overlay di consenso: i cookie sono gestiti da `ConditionalEmbed`;
 - `crossorigin="anonymous"` è impostato solo se ci sono tracce di sottotitoli,
   altrimenti impedirebbe la riproduzione di video esterni senza header CORS;
-- i video Vimeo sono incorporati con un iframe.
+- i video Vimeo sono incorporati con un iframe;
+- il pulsante Picture-in-Picture non viene creato dove non può funzionare:
+  per i video YouTube (il video è dentro l'iframe di youtube.com) e nei
+  browser senza l'API Picture-in-Picture (es. Firefox, che ha un suo PiP
+  nativo), dove video.js lo mostrerebbe sempre disabilitato.
