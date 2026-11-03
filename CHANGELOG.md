@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0](https://github.com/RedTurtle/volto-agid-video/compare/v0.2.0...v0.3.0) (2026-11-03)
+
+### Features
+
+* hide the picture-in-picture button where it can't work ([#1](https://github.com/RedTurtle/volto-agid-video/issues/1)) ([a937b1b](https://github.com/RedTurtle/volto-agid-video/commit/a937b1b6eddd0b181f1e415b3a5824c580e0df06))
+
+### Documentation
+
+* fix volto-gdpr-privacy repository link in README ([#2](https://github.com/RedTurtle/volto-agid-video/issues/2)) ([7d7fe8f](https://github.com/RedTurtle/volto-agid-video/commit/7d7fe8fdfd7d5c25c791b9cb00737f299472a4f3))
+
 ## 0.2.0 (2026-10-28)
 
 ### Features
